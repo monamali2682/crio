@@ -1,0 +1,50 @@
+import java.util.*;
+
+class NextGreaterElementWithSameSetOfDigits{
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        int n;
+        n=sc.nextInt();
+        System.out.print(nextGreaterElementWithSameSetOfDigits(n));
+    }
+
+    static void swap(char ar[], int i, int j){
+        char temp = ar[i];
+        ar[i] = ar[j];
+        ar[j] = temp;
+    }
+
+    static int nextGreaterElementWithSameSetOfDigits(int n){
+        String str=Integer.toString(n);
+        char[] ar=str.toCharArray();
+        int i=0;
+        for (i = ar.length - 1; i > 0; i--){
+            int a=ar[i]-'a';
+            int b=ar[i-1]-'a';
+            if (a > b) {
+                break;
+            }
+        }
+         
+        if (i == 0)
+        {
+            return -1;
+        }
+        else{
+            int x = ar[i - 1]-'a', min = i;
+            for (int j = i + 1; j < ar.length; j++)
+            {
+                if (ar[j]-'a' > x && ar[j]-'a' < ar[min]-'a')
+                {
+                    min = j;
+                }
+            }
+            swap(ar, i - 1, min);
+            Arrays.sort(ar, i, ar.length);
+            String stringNew = new String(ar);
+            return Integer.parseInt(stringNew);
+    
+        }
+        
+    }
+}
