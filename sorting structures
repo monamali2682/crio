@@ -1,0 +1,75 @@
+import java.util.*;
+
+class Student {
+    int id;
+    String name;
+    int marks[] = new int[5];
+
+    public Student(int id, String name, int marks[]) {
+        this.id = id;
+        this.name = name;
+
+        for (int i = 0; i < 5; i++) {
+            this.marks[i] = marks[i];
+        }
+    }
+}
+
+class customComparator implements Comparator<Student>{
+    
+    public int compare(Student a,Student b){
+        int sumA=0;
+        int sumB=0;
+        for(int i=0;i<5;i++){
+            sumA+=a.marks[i];
+            sumB+=b.marks[i];
+        }
+        int MarkCompare =sumA > sumB ? -1 : sumA == sumB ? 0 : 1;
+ 
+        int nameCompare = a.name.compareTo(
+                b.name);
+ 
+        int idCompare = a.id < b.id ? -1 : a.id == b.id ? 0 : 1;
+        return (MarkCompare == 0) ? (nameCompare==0 ? idCompare
+                                      :nameCompare):MarkCompare;
+    }
+}
+
+
+class MarksSort {
+    public static void main(String args[]) {
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        Student arr[] = new Student[n];
+
+        for (int i = 0; i < n; i++) {
+
+            int id = sc.nextInt();
+            String name = sc.next();
+            int marks[] = new int[5];
+
+            for (int j = 0; j < 5; j++)
+                marks[j] = sc.nextInt();
+            arr[i] = new Student(id, name, marks);
+        }
+
+        int res[] = marksSort(n, arr);
+
+        for (int j : res) {
+            System.out.print(j + " ");
+        }
+    }
+  
+
+    static int[] marksSort(int n, Student[] arr) {
+        
+        Arrays.sort(arr, new customComparator());
+        int[] ans=new int[n];
+        for(int i=0;i<n;i++){
+            ans[i]=arr[i].id;
+        }
+        return ans;
+    }
+
+}
