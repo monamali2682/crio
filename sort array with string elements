@@ -1,0 +1,35 @@
+import java.util.*;
+
+class CustomComparator implements Comparator<String>{
+    public int compare(String a,String b){
+        int lexComp=a.compareTo(b);
+        int ans= a.length()<b.length()? -1:a.length()==b.length()? lexComp:1;
+        return ans;
+    }
+}
+
+class NumSort {
+    public static void main(String args[]) {
+
+        Scanner sc = new Scanner(System.in);
+
+        int n = sc.nextInt();
+        String arr[] = new String[n];
+
+        for (int i = 0; i < n; i++) {
+            arr[i] = sc.next();
+        }
+
+        String sortedArray[] = numSort(n, arr);
+
+        for (String num : sortedArray) {
+            System.out.print(num + " ");
+        }
+
+    }
+
+    static String[] numSort(int n, String[] arr) {
+        Arrays.sort(arr, new CustomComparator());
+        return arr;
+    }
+}
