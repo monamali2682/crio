@@ -1,0 +1,29 @@
+import java.util.*;
+class MoveZeroes{
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n=sc.nextInt();
+		Vector<Integer> vec = new Vector<Integer>();
+		for(int i=0;i<n;i++)
+			vec.add(sc.nextInt());
+		Vector<Integer> res = moveZeroes(vec);
+		for(Integer elem : res)
+			System.out.print(elem+" ");
+	}
+  
+	private static Vector<Integer> moveZeroes(Vector<Integer> v){
+		Vector<Integer> result = new Vector<Integer>();
+		int count=0;
+		for (Integer i = 0; i < v.size(); i++)
+        {
+            if(v.get(i)!=0){
+				result.add(v.get(i));
+				count++;
+			}
+        }
+		for(Integer i = count; i < v.size(); i++){
+			result.add(0);
+		}
+		return result;
+	}
+}
